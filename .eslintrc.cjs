@@ -11,11 +11,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'airbnb',
-    'airbnb-typescript',
-    'airbnb/hooks',
     'plugin:react/recommended',
-    'standard-with-typescript',
     'plugin:tailwindcss/recommended',
     'plugin:prettier/recommended',
   ],
@@ -29,8 +25,8 @@ module.exports = {
   },
   rules: {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
-    'prettier/prettier': 2,
-    'prettier/prettier': 'error',
+    'object-curly-newline': 0,
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'import/order': [
       2,
       {
@@ -42,7 +38,5 @@ module.exports = {
         'newlines-between': 'always-and-inside-groups',
       },
     ],
-    'object-curly-newline': 0,
-    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
   },
 };
