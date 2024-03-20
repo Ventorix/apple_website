@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  env: {browser: true, es2021: true},
+  env: { browser: true, es2021: true },
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -22,18 +22,27 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'prettier'],
-
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
+  },
   rules: {
-    'max-len': [2, 250],
-    'no-multiple-empty-lines': [
-      'error',
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'prettier/prettier': 2,
+    'prettier/prettier': 'error',
+    'import/order': [
+      2,
       {
-        max: 1,
-        maxEOF: 1,
+        groups: ['external', 'builtin', 'index', 'sibling', 'parent', 'internal', 'type'],
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+        'newlines-between': 'always-and-inside-groups',
       },
     ],
-    'prettier/prettier': 'error',
     'object-curly-newline': 0,
-    'react-refresh/only-export-components': ['warn', {allowConstantExport: true}],
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
   },
-}
+};
