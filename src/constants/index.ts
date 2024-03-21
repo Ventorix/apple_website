@@ -77,8 +77,8 @@ interface SizesProps {
   value: string;
 }
 export const sizes: SizesProps[] = [
-  { label: '6.1', value: 'small' },
-  { label: '6.7', value: 'large' },
+  { label: '6.1"', value: 'small' },
+  { label: '6.7"', value: 'large' },
 ];
 
 export const footerLinks: string[] = [

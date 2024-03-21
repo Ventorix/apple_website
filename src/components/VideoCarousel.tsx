@@ -7,13 +7,21 @@ gsap.registerPlugin(ScrollTrigger);
 import { highlightsSlides } from '../constants';
 import { pauseImg, playImg, replayImg } from '../utils';
 
+interface VideoProps {
+  isEnd: boolean;
+  startPlay: boolean;
+  videoId: number;
+  isLastVideo: boolean;
+  isPlaying: boolean;
+}
+
 const VideoCarousel = () => {
   const videoRef = useRef([]);
   const videoSpanRef = useRef([]);
   const videoDivRef = useRef([]);
 
   // video and indicator
-  const [video, setVideo] = useState({
+  const [video, setVideo] = useState<VideoProps>({
     isEnd: false,
     startPlay: false,
     videoId: 0,
@@ -100,7 +108,6 @@ const VideoCarousel = () => {
       // update the progress bar
       const animUpdate = () => {
         anim.progress(
-          // @ts-ignore
           videoRef.current[videoId].currentTime / highlightsSlides[videoId].videoDuration
         );
       };
@@ -118,17 +125,15 @@ const VideoCarousel = () => {
   useEffect(() => {
     if (loadedData.length > 3) {
       if (!isPlaying) {
-        // @ts-ignore
         videoRef.current[videoId].pause();
       } else {
-        // @ts-ignore
         startPlay && videoRef.current[videoId].play();
       }
     }
   }, [startPlay, videoId, isPlaying, loadedData]);
 
   // vd id is the id for every video until id becomes number 3
-  const handleProcess = (type: string, i = 0) => {
+  const handleProcess = (type, i) => {
     switch (type) {
       case 'video-end':
         setVideo((pre) => ({ ...pre, isEnd: true, videoId: i + 1 }));
@@ -154,7 +159,7 @@ const VideoCarousel = () => {
         return video;
     }
   };
-  // @ts-ignore
+
   const handleLoadedMetaData = (i, e) => setLoadedData((pre) => [...pre, e]);
 
   return (
@@ -170,7 +175,6 @@ const VideoCarousel = () => {
                   className={`${list.id === 2 && 'translate-x-44'} pointer-events-none`}
                   preload='auto'
                   muted
-                  // @ts-ignore
                   ref={(el) => (videoRef.current[i] = el)}
                   onEnded={() =>
                     i !== 3 ? handleProcess('video-end', i) : handleProcess('video-last')
@@ -200,12 +204,10 @@ const VideoCarousel = () => {
             <span
               key={i}
               className='relative mx-2 h-3 w-3 cursor-pointer rounded-full bg-gray-200'
-              // @ts-ignore
               ref={(el) => (videoDivRef.current[i] = el)}
             >
               <span
                 className='absolute h-full w-full rounded-full'
-                // @ts-ignore
                 ref={(el) => (videoSpanRef.current[i] = el)}
               />
             </span>
