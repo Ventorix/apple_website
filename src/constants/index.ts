@@ -1,3 +1,4 @@
+import { VideoType } from '../types/videoType';
 import {
   blackImg,
   blueImg,
@@ -7,11 +8,11 @@ import {
   highlightThirdVideo,
   whiteImg,
   yellowImg,
-} from '../utils'
+} from '../utils';
 
-export const navLists = ['Store', 'Mac', 'iPhone', 'Support']
+export const navLists: string[] = ['Store', 'Mac', 'iPhone', 'Support'];
 
-export const hightlightsSlides = [
+export const highlightsSlides: VideoType[] = [
   {
     id: 1,
     textLists: ['Enter A17 Pro.', 'Game‑changing chip.', 'Groundbreaking performance.'],
@@ -36,9 +37,16 @@ export const hightlightsSlides = [
     video: highlightFourthVideo,
     videoDuration: 3.63,
   },
-]
+];
 
-export const models = [
+interface ModalsProps {
+  id: number;
+  title: string;
+  color: string[];
+  img: string;
+}
+
+export const models: ModalsProps[] = [
   {
     id: 1,
     title: 'iPhone 15 Pro in Natural Titanium',
@@ -63,11 +71,20 @@ export const models = [
     color: ['#454749', '#3b3b3b', '#181819'],
     img: blackImg,
   },
-]
+];
+interface SizesProps {
+  label: string;
+  value: string;
+}
+export const sizes: SizesProps[] = [
+  { label: '6.1', value: 'small' },
+  { label: '6.7', value: 'large' },
+];
 
-export const sizes = [
-  {label: '6.1"', value: 'small'},
-  {label: '6.7"', value: 'large'},
-]
-
-export const footerLinks = ['Privacy Policy', 'Terms of Use', 'Sales Policy', 'Legal', 'Site Map']
+export const footerLinks: string[] = [
+  'Privacy Policy',
+  'Terms of Use',
+  'Sales Policy',
+  'Legal',
+  'Site Map',
+];
