@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 gsap.registerPlugin(ScrollTrigger);
 
-export function animateWithGsap({ target, animationProps, scrollProps }) {
+export const animateWithGsap = (target, animationProps, scrollProps) => {
   gsap.to(target, {
     ...animationProps,
     scrollTrigger: {
@@ -13,7 +13,7 @@ export function animateWithGsap({ target, animationProps, scrollProps }) {
       ...scrollProps,
     },
   });
-}
+};
 
 export const animateWithGsapTimeline = (
   timeline,
