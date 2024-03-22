@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import * as THREE from 'three';
 
 function IPhone(props) {
+  useGLTF.preload('/model.gltf');
   const { nodes, materials } = useGLTF('/models/scene.glb');
 
   const texture = useTexture(props.item.img);

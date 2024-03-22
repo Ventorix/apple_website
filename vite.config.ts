@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 import { configDefaults } from 'vitest/config';
@@ -13,8 +14,12 @@ export default defineConfig({
       all: true,
     },
   },
-  plugins: [react()],
+  plugins: [react(), sentryVitePlugin({
+    org: "ventorix-inc",
+    project: "javascript-react"
+  })],
   build: {
     target: 'esnext',
+    sourcemap: true
   },
 });

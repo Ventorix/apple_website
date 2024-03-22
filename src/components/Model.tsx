@@ -2,23 +2,17 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useEffect, useRef, useState } from 'react';
 import { yellowImg } from '../utils';
+import ModelView from './ModelView';
 
 import { View } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import * as THREE from 'three';
 import { models, sizes } from '../constants';
 import { animateWithGsapTimeline } from '../utils/animations';
-import ModelView from './ModelView';
-
-export interface ModelProps {
-  title: string;
-  color: string[];
-  img: string;
-}
 
 const Model = () => {
   const [size, setSize] = useState('small');
-  const [model, setModel] = useState<ModelProps>({
+  const [model, setModel] = useState({
     title: 'iPhone 15 Pro in Natural Titanium',
     color: ['#8F8A81', '#FFE7B9', '#6F6C64'],
     img: yellowImg,
@@ -40,24 +34,14 @@ const Model = () => {
 
   useEffect(() => {
     if (size === 'large') {
-      animateWithGsapTimeline({
-        timeline: tl,
-        rotationRef: small,
-        rotationState: smallRotation,
-        firstTarget: '#view1',
-        secondTarget: '#view2',
+      animateWithGsapTimeline(tl, small, smallRotation, '#view1', '#view2', {
         transform: 'translateX(-100%)',
         duration: 2,
       });
     }
 
     if (size === 'small') {
-      animateWithGsapTimeline({
-        timeline: tl,
-        rotationRef: large,
-        rotationState: largeRotation,
-        firstTarget: '#view2',
-        secondTarget: '#view1',
+      animateWithGsapTimeline(tl, large, largeRotation, '#view2', '#view1', {
         transform: 'translateX(0)',
         duration: 2,
       });
@@ -65,16 +49,14 @@ const Model = () => {
   }, [size]);
 
   useGSAP(() => {
-    gsap.to('#heading', {
-      opacity: 1,
-      y: 0,
-    });
+    gsap.to('#heading', { y: 0, opacity: 1 });
   }, []);
+
   return (
     <section className='common-padding'>
       <div className='screen-max-width'>
         <h1 id='heading' className='section-heading'>
-          Take a closer look
+          Take a closer look.
         </h1>
 
         <div className='mt-5 flex flex-col items-center'>
@@ -100,7 +82,15 @@ const Model = () => {
             />
 
             <Canvas
-              className='fixed bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden'
+              className='h-full w-full'
+              style={{
+                position: 'fixed',
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                overflow: 'hidden',
+              }}
               eventSource={document.getElementById('root')}
             >
               <View.Port />
@@ -112,13 +102,13 @@ const Model = () => {
 
             <div className='flex-center'>
               <ul className='color-container'>
-                {models.map((model, i) => (
+                {models.map((item, i) => (
                   <li
                     key={i}
                     className='mx-2 h-6 w-6 cursor-pointer rounded-full'
-                    style={{ backgroundColor: model.color[0] }}
-                    onClick={() => setModel(model)}
-                  ></li>
+                    style={{ backgroundColor: item.color[0] }}
+                    onClick={() => setModel(item)}
+                  />
                 ))}
               </ul>
 
