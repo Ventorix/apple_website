@@ -16,7 +16,7 @@ export default defineConfig({
   },
   plugins: [react(), sentryVitePlugin({
     org: "ventorix-inc",
-    project: "javascript-react"
+    project: "apple-website"
   })],
   build: {
     target: 'esnext',
